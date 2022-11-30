@@ -1,0 +1,36 @@
+const commander = require('commander');
+const program = new commander.Command();
+
+function errorColor(str) {
+  // Add ANSI escape codes to display text in red.
+  return `\x1b[31m${str}\x1b[0m`;
+}
+
+program
+  .configureOutput({
+    // Visibly override write routines as example!
+    writeOut: (str) => process.stdout.write(`[OUT] ${str}`),
+    writeErr: (str) => process.stdout.write(`[ERR] ${str}`),
+    // Output errors in red.
+    outputError: (str, write) => write(errorColor(str))
+  });
+
+program
+  .version('1.2.3')
+  .option('-c, --compress')
+  .command('sub-command')
+  .option('-e, --error')
+  .action(options => {
+    if (options.error) {
+      program.error('Password must be longer than four characters');
+      // program.error('Custom processing has failed', { exitCode: 2, code: 'my.custom.error' });
+    }
+  });
+
+program.parse();
+
+// Try the following:
+//    node configure-output.js --version
+//    node configure-output.js --unknown
+//    node configure-output.js --help
+//    node configure-output.js

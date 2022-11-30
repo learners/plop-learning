@@ -1,0 +1,16 @@
+{
+  "name": "plop-learning",
+  "type": "commonjs",
+  "scripts": {
+    "plop": "plop --cwd templates/custom-action/ --dest ."
+  },
+  "devDependencies": {
+    "commander": "^9.4.1",
+    "inquirer-directory": "^2.2.0",
+    "plop": "^3.1.1",
+    "plop-pack-fancy-comments": "^0.2.1"
+  },
+  "dependencies": {
+    "handlebars": "^4.7.7"
+  }
+}
